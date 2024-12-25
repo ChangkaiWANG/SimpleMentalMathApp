@@ -14,14 +14,14 @@ public class ConfigManager {
   private ConfigManager() {}
 
   /**
-   * Charger la langue par défaut
+   * load default configuration
    */
   public static void loadDefaultConfiguration(){
-    try (InputStream inputStream = getResourceAsStream("lang/lang_en.properties")) {
+    try (InputStream inputStream = getResourceAsStream("/lang/lang_en.properties")) {
       currentLangProperties.load(inputStream);
       configProperties.setProperty("operator", "+"); //fast
     } catch (IOException e) {
-      System.out.println("Une erreur dans loadDefaultProperties");
+      System.out.println("error in loadDefaultProperties");
       e.printStackTrace();
     }
   }
@@ -43,8 +43,8 @@ public class ConfigManager {
   }
 
   /**
-   * Chargement du fichier de configuration de la langue
-   * @return boolean si le chargement a réussi
+   * load custom lang file
+   * @return true if the file is loaded successfully
    */
   public static boolean loadCustomLangConfigFile() {
     String langCode = configProperties.getProperty("language");
@@ -69,10 +69,11 @@ public class ConfigManager {
   }
   
   /**
-   * chargement de config.properties
+   * load custom config file
    */
   public static boolean loadCustomConfigFile() {
     String configDirPath = getConfigDirectoryPath();
+    System.out.println("configDirPath: " + configDirPath);
     
     if (configDirPath != null) {
       File configDir = new File(configDirPath);
