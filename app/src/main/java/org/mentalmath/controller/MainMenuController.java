@@ -21,7 +21,7 @@ public class MainMenuController {
     @FXML
     public void initialize() {
       updateUI(); 
-      bQuit.setOnAction(e -> System.exit(0));
+      bQuit.setOnAction(e -> System.exit(0)); 
     }
 
     private void updateUI() {
@@ -36,76 +36,22 @@ public class MainMenuController {
 
     @FXML
     public void onAdditionClicked(ActionEvent event) {
-      try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/game.fxml"));
-        Scene paramScene = new Scene(loader.load());
-        
-        // Obtenir la fenêtre principale (Stage) et changer la scène
-        Stage primaryStage = (Stage) bParam.getScene().getWindow();
-        primaryStage.setScene(paramScene);
-      } catch (IOException e) {
-          e.printStackTrace();
-      }
+      changeGameViewScene("+");
     }
 
     @FXML
     public void onSubtractionClicked(ActionEvent event) {
-      if (!verifConfig()) return;
-      try {
-        ConfigManager.setProperty("operator", "-");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/game.fxml"));
-        Scene paramScene = new Scene(loader.load());
-        
-        // Obtenir la fenêtre principale (Stage) et changer la scène
-        
-        Stage primaryStage = (Stage) bParam.getScene().getWindow();
-        primaryStage.setScene(paramScene);
-      } catch (IOException e) {
-          e.printStackTrace();
-      }
+      changeGameViewScene("-");
     }
 
     @FXML
     public void onMultiplicationClicked(ActionEvent event) {
-      if (!verifConfig()) return;
-      try {
-        ConfigManager.setProperty("operator", "*");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/game.fxml"));
-        Scene paramScene = new Scene(loader.load());
-        
-        // Obtenir la fenêtre principale (Stage) et changer la scène
-        
-        Stage primaryStage = (Stage) bParam.getScene().getWindow();
-        primaryStage.setScene(paramScene);
-      } catch (IOException e) {
-          e.printStackTrace();
-      }
+      changeGameViewScene("*");
     }
 
     @FXML
     public void onDivisionClicked(ActionEvent event) {
-      if (!verifConfig()) return;
-      try {
-        ConfigManager.setProperty("operator", "/");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/game.fxml"));
-        Scene paramScene = new Scene(loader.load());
-        
-        // Obtenir la fenêtre principale (Stage) et changer la scène
-        
-        Stage primaryStage = (Stage) bParam.getScene().getWindow();
-        primaryStage.setScene(paramScene);
-      } catch (IOException e) {
-          e.printStackTrace();
-      }
-    }
-
-    private boolean verifConfig() {
-      boolean isPresent = ConfigManager.loadCustomConfigFile();
-      if (!isPresent) {
-        textMsg.setText(ConfigManager.getCurrentLangProperties().getProperty("main_menu_error_msg"));
-        textMsg.setVisible(true);
-      }
-      return isPresent;
+      changeGameViewScene("/");
     }
 
     @FXML
@@ -118,6 +64,19 @@ public class MainMenuController {
           // Obtenir la fenêtre principale (Stage) et changer la scène
           Stage primaryStage = (Stage) bParam.getScene().getWindow();
           primaryStage.setScene(paramScene);
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
+    }
+
+    //pour eviter les repetitions des try catch
+    private void changeGameViewScene(String op){
+      try {
+        ConfigManager.setProperty("operator", op);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/game.fxml"));
+        Scene paramScene = new Scene(loader.load());
+        Stage primaryStage = (Stage) bParam.getScene().getWindow();
+        primaryStage.setScene(paramScene);
       } catch (IOException e) {
           e.printStackTrace();
       }

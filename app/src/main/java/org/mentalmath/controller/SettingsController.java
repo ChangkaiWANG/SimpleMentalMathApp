@@ -24,12 +24,12 @@ public class SettingsController {
 
     bLangFR.setOnAction(e -> {
       ConfigManager.setProperty("language", "fr");
-      ConfigManager.loadCustomLangConfigFile();
+      ConfigManager.loadConfiguration();
       updateUI();
     });
     bLangEN.setOnAction(e -> {
       ConfigManager.setProperty("language", "en");
-      ConfigManager.loadCustomLangConfigFile();
+      ConfigManager.loadConfiguration();
       updateUI();
     });
   }

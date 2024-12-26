@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        ConfigManager.loadCustomConfiguration();
+        ConfigManager.loadConfiguration();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/main_menu.fxml")); //chargement depuis resources
         Scene scene = new Scene(loader.load());
         

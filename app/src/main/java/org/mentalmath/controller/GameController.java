@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import java.util.Random;
 
 public class GameController {
   
@@ -46,13 +47,13 @@ public class GameController {
   }
 
   private int generateQuestion() {
-    int a = (int) (Math.random() * 10);
-    int b = (int) (Math.random() * 10);
+    Random random = new Random();
+    int a = random.nextInt(11);
+    int b = random.nextInt(11);
     String operator = ConfigManager.getProperty("operator");
     if (operator.equals("/")) {
-      b = (int) (Math.random() * 9) + 1; // Évite la division par zéro
-      int res = a * b;
-      a = res;
+      b = random.nextInt(11) + 1; // Évite la division par zéro
+      a = a * b;
     }
     textQuestion.setText(a + " " + operator + " " + b + " = ");
     textAnswer.clear();

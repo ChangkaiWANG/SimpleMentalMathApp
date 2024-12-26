@@ -12,6 +12,8 @@ repositories {
 dependencies {
     testImplementation libs.junit
     implementation libs.guava
+    implementation "org.openjfx:javafx-controls:23.0.1"
+    implementation "org.openjfx:javafx-fxml:23.0.1"
 }
 
 javafx {
@@ -25,10 +27,11 @@ java {
         languageVersion = JavaLanguageVersion.of(23)
     }
 }
+// sourceSets.main.resources.srcDir 'src/main/resources'
 
 application {
     mainClass = 'org.mentalmath.Main'
-    mainModule = "SimpleMentalMathApp"
+    // mainModule = "SimpleMentalMathApp"
 }
 
 jlink {
@@ -43,14 +46,14 @@ jlink {
             '--app-version', '1.0.0',                         
             '--vendor', 'CompanyName',                    
             '--mac-package-identifier', 'com.yourcompany.simplementalmathapp', // ID unique
-            '--mac-package-name', 'Simple Mental Math App'    // Nom affiché dans macOS
+            '--mac-package-name', 'MentalMath'    // Nom affiché dans macOS
         ]
     }
 }
 jar {
     manifest {
         attributes(
-            'Main-Class': 'org.mentalmath.Main',
+            'Main-Class': application.mainClass,
             'Implementation-Title': 'SimpleMentalMathApp'
         )
     }
