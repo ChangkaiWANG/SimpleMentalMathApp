@@ -27,10 +27,9 @@ java {
         languageVersion = JavaLanguageVersion.of(23)
     }
 }
-// sourceSets.main.resources.srcDir 'src/main/resources'
 
 application {
-    mainClass = 'org.mentalmath.Main'
+    mainClass = 'org.mentalmath.Launcher'
     // mainModule = "SimpleMentalMathApp"
 }
 
@@ -46,15 +45,17 @@ jlink {
             '--app-version', '1.0.0',                         
             '--vendor', 'CompanyName',                    
             '--mac-package-identifier', 'com.yourcompany.simplementalmathapp', // ID unique
-            '--mac-package-name', 'MentalMath'    // Nom affiché dans macOS
+            '--mac-package-name', 'MentalMath',    // Nom affiché dans macOS
+            '--resource-dir', "${projectDir}/src/main/resources"
         ]
     }
 }
-jar {
-    manifest {
-        attributes(
-            'Main-Class': application.mainClass,
-            'Implementation-Title': 'SimpleMentalMathApp'
-        )
-    }
-}
+// jar {
+//     manifest {
+//         attributes(
+//             'Main-Class': application.mainClass,
+//             'Implementation-Title': 'SimpleMentalMathApp'
+//         )
+//     }
+// }
+
